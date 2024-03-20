@@ -12,6 +12,7 @@ https://docs.djangoproject.com/en/5.0/ref/settings/
 
 from pathlib import Path
 import os
+import Secrets
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -75,11 +76,16 @@ WSGI_APPLICATION = 'MyFilmFolio.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/5.0/ref/settings/#databases
 
+## Postgres
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
-    }
+     'default': {
+         'ENGINE': 'django.db.backends.postgresql_psycopg2',
+         'NAME':'postgres',
+         'USER':'superuser',
+         'PASSWORD': Secrets.DBMS_PASS,
+         'HOST':'database-1.czsoykckqigl.ap-south-1.rds.amazonaws.com',
+         'PORT':'5432'
+     }
 }
 
 
