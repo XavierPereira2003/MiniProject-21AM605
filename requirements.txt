@@ -1,6 +1,15 @@
-asgiref==3.7.2
-Django==5.0.2
-psycopg2==2.9.9
-psycopg2-binary==2.9.9
-sqlparse==0.4.4
-tzdata==2024.1
+backports.functools-lru-cache==2.0.0
+Brotli @ file:///private/var/folders/nz/j6p8yfhx1mv_0grj5xl4650h0000gp/T/abs_38mvgltu8c/croots/recipe/brotli-split_1659616064542/work
+certifi @ file:///private/var/folders/k1/30mswbxs7r1g6zwn8y4fyt500000gp/T/abs_3bzbkiv4h_/croot/certifi_1707229182618/work/certifi
+cffi==1.16.0
+charset-normalizer @ file:///tmp/build/80754af9/charset-normalizer_1630003229654/work
+cryptography==42.0.5
+idna @ file:///private/var/folders/nz/j6p8yfhx1mv_0grj5xl4650h0000gp/T/abs_771olrhiqw/croot/idna_1666125579282/work
+ndg-httpsclient==0.5.1
+pyasn1==0.5.1
+pycparser==2.21
+pyOpenSSL==24.1.0
+PySocks @ file:///Users/ktietz/ci_310/pysocks_1643961536721/work
+requests @ file:///private/var/folders/nz/j6p8yfhx1mv_0grj5xl4650h0000gp/T/abs_b3tnputioh/croot/requests_1707355573919/work
+tmdbv3api==1.9.0
+urllib3 @ file:///private/var/folders/k1/30mswbxs7r1g6zwn8y4fyt500000gp/T/abs_aff2m3lasf/croot/urllib3_1707770561896/work
