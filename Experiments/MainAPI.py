@@ -1,4 +1,4 @@
-from tmdbv3api import TMDb, Movie
+from tmdbv3api import TMDb, Movie, Person
 from SecretsToo import api
 
 class TMDbClient:
@@ -6,26 +6,47 @@ class TMDbClient:
         self.tmdb = TMDb()
         self.tmdb.api_key = api_key
         self.movie = Movie()
+        self.person = Person()
 
     def get_movie_details(self, movie_id):
         movie_details = self.movie.details(movie_id)
+        credits = self.movie.credits(movie_id)
+        director = None
+        director_id = None
+        director_image = None
+        actors = []
+        actor_ids = []  # Store actor IDs separately
+        actor_images = {}  # Store actor images
+        for crew_member in credits['crew']:
+            if crew_member['job'] == 'Director':
+                director = crew_member['name']
+                director_id = crew_member['id']  # Store director's ID
+                director_details = self.person.details(director_id)
+                director_image = director_details.profile_path  # Retrieve director's image URL
+
+        count = 0  # To Limit The number of Actors fetched, using this since [:5] was not working
+        for actor in credits['cast']:
+            if count > 5:
+                break
+            actors.append(actor['name'])
+            actor_ids.append(actor['id'])  # Store actor IDs
+            actor_details = self.person.details(actor['id'])
+            actor_images[actor['id']] = actor_details.profile_path  # Retrieve actor's image URL
+            count += 1
         movie_info = {
             'id': movie_details.id,
             'title': movie_details.title,
             'poster': movie_details.poster_path,
-            'language': movie_details.original_language
+            'language': movie_details.original_language,
+            'director': director,
+            'director_id': director_id,  # Include director's ID
+            'director_image': director_image,  # Include director's image URL
+            'actors': actors,
+            'actor_ids': actor_ids,  # Include actor IDs in the returned dictionary
+            'actor_images': actor_images  # Include actor images dictionary
         }
         return movie_info
 
-    def get_movie_actors(self, movie_id):
-        actors = self.movie.credits(movie_id)['cast']
-        actors_info = [{'name': actor['name'], 'image': actor['profile_path']} for actor in actors[:5]]
-        return actors_info
-
-    def get_movie_directors(self, movie_id):
-        directors = [crew_member for crew_member in self.movie.credits(movie_id)['crew'] if crew_member['job'] == 'Director']
-        directors_info = [{'name': director['name'], 'image': director['profile_path']} for director in directors]
-        return directors_info
 
 # Example usage:
 if __name__ == "__main__":
@@ -39,17 +60,10 @@ if __name__ == "__main__":
     print("Title:", movie_details['title'])
     print("Poster:", movie_details['poster'])
     print("Language:", movie_details['language'])
-
-    # Get actors of the movie
-    actors = tmdb_client.get_movie_actors(movie_id)
-    print("\nActors:")
-    for actor in actors:
-        print("- Name:", actor['name'])
-        print("  Image:", actor['image'])
-
-    # Get directors of the movie
-    directors = tmdb_client.get_movie_directors(movie_id)
-    print("\nDirectors:")
-    for director in directors:
-        print("- Name:", director['name'])
-        print("  Image:", director['image'])
+    print("Director:", movie_details['director'])
+    print("Director ID:", movie_details['director_id'])
+    print("Director Image:", movie_details['director_image'])
+    print("Actors:", ", ".join(movie_details['actors']))
+    # print("Actor IDs:", ", ".join(str(actor_id) for actor_id in movie_details['actor_ids']))
+    for actor_id, actor_image in movie_details['actor_images'].items():
+        print(f"Actor ID: {actor_id}, Actor Image: {actor_image}")
