@@ -12,11 +12,12 @@ https://docs.djangoproject.com/en/5.0/ref/settings/
 
 from pathlib import Path
 import os
-
-from . import Secrets
+from dotenv import load_dotenv, dotenv_values
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
+# DotEnv
+load_dotenv()
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/5.0/howto/deployment/checklist/
@@ -81,9 +82,10 @@ DATABASES = {
      'default': {
          'ENGINE': 'django.db.backends.postgresql_psycopg2',
          'NAME':'postgres',
-         'USER':'superuser',
-         'PASSWORD': Secrets.DBMS_PASS,
-         'HOST':'database-1.czsoykckqigl.ap-south-1.rds.amazonaws.com',
+         'USER':'postgres', # Could be superuser in Windows's Case
+         'PASSWORD': os.getenv('DBMS_PASS'),
+         'HOST':'localhost',
+         # 'HOST':'database-1.czsoykckqigl.ap-south-1.rds.amazonaws.com',
          'PORT':'5432'
      }
 }

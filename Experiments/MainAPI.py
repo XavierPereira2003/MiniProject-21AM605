@@ -1,5 +1,9 @@
+import os
 from tmdbv3api import TMDb, Movie, Person
-from SecretsToo import api
+from dotenv import load_dotenv, dotenv_values
+
+
+load_dotenv()
 
 class TMDbClient:
     def __init__(self, api_key):
@@ -50,7 +54,7 @@ class TMDbClient:
 
 # Example usage:
 if __name__ == "__main__":
-    tmdb_client = TMDbClient(api_key=api)
+    tmdb_client = TMDbClient(api_key=os.getenv('api'))
 
     # Get details of a specific movie
     movie_id = 603  # Example movie ID
