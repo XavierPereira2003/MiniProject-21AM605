@@ -1,10 +1,171 @@
-<!-- home.html -->
-
-{% extends 'base.html' %}
+{% extends "base.html" %}
 
 {% block title %}Home - My Film Folio{% endblock %}
+{% block style %}
+    body {
+        padding-top: 0;
+    }
+
+    .col-md-3 {
+            margin-left: auto; /* Adjust sidebar to the right */
+    }
+
+    .section-spacing {
+        margin-bottom: 40px; /* Adjust the spacing as needed */
+    }
+
+@media (min-width: 576px) {
+    .card-group.card-group-scroll {
+        overflow-x: auto;
+        flex-wrap: nowrap;
+    }
+
+    .card-group.card-group-scroll > .card {
+        flex-basis: 35%;
+    }
+}
+{% endblock %}
 
 {% block content %}
-<h1>Welcome to My Film Folio</h1>
-<!-- Add more content here -->
+<div class="row">
+    <div class="col-lg-8">
+        <h2>Featured Movies</h2>
+        <div class="container">
+            <div class="card-group card-group-scroll">
+                <div class="card">
+                    <img class="card-img-top" src="https://via.placeholder.com/100x100" alt="Card image cap">
+                    <div class="card-body">
+                        <h5 class="card-title">Card title</h5>
+                        <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+                        <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+                    </div>
+                </div>
+                <div class="card">
+                    <img class="card-img-top" src="https://via.placeholder.com/100x100" alt="Card image cap">
+                    <div class="card-body">
+                        <h5 class="card-title">Card title</h5>
+                        <p class="card-text">This card has supporting text below as a natural lead-in to additional content.</p>
+                        <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+                    </div>
+                </div>
+                <div class="card">
+                    <img class="card-img-top" src="https://via.placeholder.com/100x100" alt="Card image cap">
+                    <div class="card-body">
+                        <h5 class="card-title">Card title</h5>
+                        <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This card has even longer content than the first to show that equal height action.</p>
+                        <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+                    </div>
+                </div>
+                <div class="card">
+                    <img class="card-img-top" src="https://via.placeholder.com/100x100" alt="Card image cap">
+                    <div class="card-body">
+                        <h5 class="card-title">Card title</h5>
+                        <p class="card-text">This card has supporting text below as a natural lead-in to additional content.</p>
+                        <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="section-spacing"></div>
+        <h2>Popular Movies</h2>
+        <div class="container">
+            <div class="card-group card-group-scroll">
+                <div class="card">
+                    <img class="card-img-top" src="https://via.placeholder.com/100x100" alt="Card image cap">
+                    <div class="card-body">
+                        <h5 class="card-title">Card title</h5>
+                        <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+                        <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+                    </div>
+                </div>
+                <div class="card">
+                    <img class="card-img-top" src="https://via.placeholder.com/100x100" alt="Card image cap">
+                    <div class="card-body">
+                        <h5 class="card-title">Card title</h5>
+                        <p class="card-text">This card has supporting text below as a natural lead-in to additional content.</p>
+                        <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+                    </div>
+                </div>
+                <div class="card">
+                    <img class="card-img-top" src="https://via.placeholder.com/100x100" alt="Card image cap">
+                    <div class="card-body">
+                        <h5 class="card-title">Card title</h5>
+                        <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This card has even longer content than the first to show that equal height action.</p>
+                        <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+                    </div>
+                </div>
+                <div class="card">
+                    <img class="card-img-top" src="https://via.placeholder.com/100x100" alt="Card image cap">
+                    <div class="card-body">
+                        <h5 class="card-title">Card title</h5>
+                        <p class="card-text">This card has supporting text below as a natural lead-in to additional content.</p>
+                        <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="section-spacing"></div>
+        <h2>Latest Movies</h2>
+        <div class="container">
+            <div class="card-group card-group-scroll">
+                <div class="card">
+                    <img class="card-img-top" src="https://via.placeholder.com/100x100" alt="Card image cap">
+                    <div class="card-body">
+                        <h5 class="card-title">Card title</h5>
+                        <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+                        <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+                    </div>
+                </div>
+                <div class="card">
+                    <img class="card-img-top" src="https://via.placeholder.com/100x100" alt="Card image cap">
+                    <div class="card-body">
+                        <h5 class="card-title">Card title</h5>
+                        <p class="card-text">This card has supporting text below as a natural lead-in to additional content.</p>
+                        <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+                    </div>
+                </div>
+                <div class="card">
+                    <img class="card-img-top" src="https://via.placeholder.com/100x100" alt="Card image cap">
+                    <div class="card-body">
+                        <h5 class="card-title">Card title</h5>
+                        <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This card has even longer content than the first to show that equal height action.</p>
+                        <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+                    </div>
+                </div>
+                <div class="card">
+                    <img class="card-img-top" src="https://via.placeholder.com/100x100" alt="Card image cap">
+                    <div class="card-body">
+                        <h5 class="card-title">Card title</h5>
+                        <p class="card-text">This card has supporting text below as a natural lead-in to additional content.</p>
+                        <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-3">
+    <!-- Placeholder for sidebar content -->
+    <div class="card" style="width: 18rem;">
+        <div class="card-body">
+            <h5 class="card-title">Select Movies By Genre</h5>
+            <h6 class="card-subtitle mb-2 text-muted">Many Amazing Genres</h6>
+            <p class="card-text">Choose one genre to find many movies of similar kind</p>
+            <div class="row justify-content-between">
+                <div class="col">
+                    <a href="#" class="card-link">Action</a>
+                </div>
+                <div class="col">
+                    <a href="#" class="card-link">Romance</a>
+                </div>
+                <div class="col">
+                    <a href="#" class="card-link">Comedy</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+</div>
 {% endblock %}
+
+
