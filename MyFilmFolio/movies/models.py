@@ -40,6 +40,12 @@ class Movies(Model):
     discription=models.TextField()
     release_date=models.DateField()
     poster_path=models.ImageField()
+    slug=models.SlugField(max_length=255, unique=True)
+
+    def save(self, *args, **kwargs):
+        if not self.slug:
+            self.slug = f"{slugify(self.title)}-{str(self.movie_id)}"
+        super().save(*args, **kwargs)
 
     def __str__(self):
         return f"{slugify(self.title)}-{str(self.movie_id)}"
