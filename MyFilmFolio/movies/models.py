@@ -51,3 +51,5 @@ class Roles(Model):
     movie=models.ForeignKey(Movies, on_delete=models.DO_NOTHING)
     cast=models.ForeignKey(Cast, on_delete=models.DO_NOTHING)
     role_name=models.CharField(max_length=255)
+
+    
