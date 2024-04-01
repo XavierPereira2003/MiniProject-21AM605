@@ -12,6 +12,12 @@ class Cast(Model):
     name=models.CharField(max_length=255)
     DoB=models.DateField()
     Image=models.ImageField()
+    slug=models.SlugField(max_length=255, unique=True)
+
+    def save(self, *args, **kwargs):
+        if not self.slug:
+            self.slug = f"{slugify(self.name)}-{str(self.cast_id)}"
+        super().save(*args, **kwargs)
 
     def __str__(self):
         return f"{slugify(self.name)}-{str(self.cast_id)}"
