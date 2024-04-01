@@ -27,13 +27,15 @@ MOVIE_GENRES = [
 ]
 # Create your models here.
 
+class Genre(Model):
+    genre=models.CharField(max_length=255, choices=MOVIE_GENRES)
 class Movies(Model):
     """
     A class representing a movie in the database.
     """
     movie_id=models.BigAutoField(primary_key=True)
     title=models.CharField(max_length=255)
-    genre=models.CharField(max_length=255, choices=MOVIE_GENRES)   
+    genre=models.ManyToManyField(Genre,related_name="movies")
     director=models.ForeignKey(Cast, on_delete=models.DO_NOTHING)
     discription=models.TextField()
     release_date=models.DateField()
