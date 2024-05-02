@@ -9,7 +9,12 @@ from . import models
 # def view_actor(request,actor_slug):
 #     actore_details=get_object_or_404(models.Cast,slug=actor_slug)
 #     return render(request,'templates/view_actor.html',{'actore_details':actore_details})
-
+from .models import  *
 
 def actors(request):
     return render(request, 'actors.html')
+
+def listActors(request):
+    castList=Cast.objects.all()
+    return render(request, 'list.html', {'castList': castList,"title": "Actors List"})
+

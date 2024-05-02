@@ -161,3 +161,6 @@ cython_debug/
 ./env
 Secrets.py
 SecretsToo.py
+*.png 
+*.jpeg
+*.jpg
