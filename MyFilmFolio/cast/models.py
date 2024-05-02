@@ -2,6 +2,9 @@
 from django.db import models
 from django.db.models import Model
 from django.utils.text import slugify
+from django.core.files.storage import FileSystemStorage
+
+castPics= FileSystemStorage(location="cast_images")
 # Create your models here.
 
 class Cast(Model):
@@ -11,8 +14,8 @@ class Cast(Model):
     cast_id=models.BigAutoField(primary_key=True)
     name=models.CharField(max_length=255)
     DoB=models.DateField()
-    Image=models.ImageField()
-    slug=models.SlugField(max_length=255, unique=True)
+    Image=models.ImageField(storage=castPics)
+    slug=models.SlugField(max_length=255, unique=True,blank=True)
 
     def save(self, *args, **kwargs):
         if not self.slug:
