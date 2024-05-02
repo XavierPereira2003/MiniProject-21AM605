@@ -2,6 +2,8 @@ from django.db import models
 from django.db.models import Model
 from django.utils.text import slugify
 from cast.models import Cast
+from django.core.files.storage import FileSystemStorage
+moviesPics= FileSystemStorage(location="movie_images")
 
 MOVIE_GENRES = [
     ("action", "Action"),
@@ -39,7 +41,7 @@ class Movies(Model):
     director=models.ForeignKey(Cast, on_delete=models.DO_NOTHING)
     discription=models.TextField()
     release_date=models.DateField()
-    poster_path=models.ImageField()
+    poster_path=models.ImageField(storage=moviesPics)
     slug=models.SlugField(max_length=255, unique=True)
 
     def save(self, *args, **kwargs):
