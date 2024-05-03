@@ -1,4 +1,5 @@
 import os
+import json
 from tmdbv3api import TMDb, Movie, Person, Discover
 from dotenv import load_dotenv, dotenv_values
 from PopulateDB import DatabaseManager
@@ -36,14 +37,14 @@ class TMDbClient:
         self.person = Person()
         self.discover = Discover()
 
-    def get_info(self, count=2, year='2024'):
+    def get_info(self, count=2, year='2024', save_to_file = False, file_name = "tmdbsave.json"):
         '''
         Gets English Movies, Persons, Actor Roles and Directors information
         :param count: number of movies to return default 2 pages (i.e. 20 Movies)
         :param year: year of movies to return
         '''
         try:
-            movie_detials = []
+            movie_details = []
             persons = []
             roles = []
             directs = []
@@ -71,17 +72,24 @@ class TMDbClient:
                     persons.append(director_info)
 
                     roles.append({id: actors_role})
+                    for actor in actors_info:
+                        persons.append(actor)
 
                     movie = {'movie_id': id, 'language': language, 'title': title, 'genre': genre,
                              'description': overview, 'poster': poster, 'director':director, 'release_date': release_date,
                              'vote_average': vote_average}
-                    movie_detials.append(movie)
+                    movie_details.append(movie)
 
+            if save_to_file:
+                with open(file_name, 'w') as f:
+                    json.dump({'movie_details': movie_details, 'persons': persons, 'roles': roles, 'directs': directs},
+                              f, indent=4)
 
-            return movie_detials, persons, roles, directs
+            return {'movie_details': movie_details, 'persons': persons, 'roles': roles, 'directs': directs}
 
         except Exception as e:
             print(e)
+            return {}
 
     def __extract_director_info(self, credits):
         director_info = {}
@@ -119,12 +127,9 @@ class TMDbClient:
 
 # Example usage:
 tmdb_client = TMDbClient(api_key=os.getenv('api'))
-movie_detials, persons, roles, directs = tmdb_client.get_info()
-print(movie_detials)
-print(persons)
-print(roles)
-print(directs)
+info = tmdb_client.get_info(save_to_file=True)
 
+print(info)
 
 # # Example usage:
 # db_manager = DatabaseManager(

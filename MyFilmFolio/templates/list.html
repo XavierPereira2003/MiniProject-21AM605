@@ -1,8 +1,20 @@
-{% extends "base.html" %}
-{% block title %}{{title}}{% endblock %}
+{% extends 'base.html' %}
 
-{% block content%}
-{% for cast in castList%}
-    <li>{{cast}}</li>
-{% endfor %}
-{% endblock%}
+{% block title %}Cast - My Film Folio{% endblock %}
+
+{% block content %}
+<div class="row row-cols-1 row-cols-md-3 g-4">
+    {% for person in cast %}
+    <div class="col">
+        <div class="card">
+            <img src="{{ person.poster }}" class="card-img-top" alt="{{ person.name }}">
+            <div class="card-body">
+                <h5 class="card-title">{{ person.name }}</h5>
+                <p class="card-text"><strong>Date of Birth:</strong> {{ person.birth_date }}</p>
+                <p class="card-text"><strong>Biography:</strong> {{ person.biography }}</p>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+{% endblock %}
