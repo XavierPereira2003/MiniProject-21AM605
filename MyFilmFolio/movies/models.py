@@ -3,7 +3,6 @@ from django.db.models import Model
 from django.utils.text import slugify
 from cast.models import Cast
 from django.core.files.storage import FileSystemStorage
-moviesPics= FileSystemStorage(location="movie_images")
 
 MOVIE_GENRES = [
     ("action", "Action"),
@@ -30,7 +29,10 @@ MOVIE_GENRES = [
 # Create your models here.
 
 class Genre(Model):
-    genre=models.CharField(max_length=255, choices=MOVIE_GENRES)
+    genre = models.CharField(max_length=255, choices=MOVIE_GENRES)
+
+    def __str__(self):
+        return self.genre
 class Movies(Model):
     """
     A class representing a movie in the database.
@@ -39,9 +41,9 @@ class Movies(Model):
     title=models.CharField(max_length=255)
     genre=models.ManyToManyField(Genre,related_name="movies")
     director=models.ForeignKey(Cast, on_delete=models.DO_NOTHING)
-    discription=models.TextField()
+    description=models.TextField()
     release_date=models.DateField()
-    poster_path=models.ImageField(storage=moviesPics)
+    poster_path = models.CharField(max_length=255)
     slug=models.SlugField(max_length=255, unique=True)
 
     def save(self, *args, **kwargs):
@@ -62,4 +64,5 @@ class Roles(Model):
     cast=models.ForeignKey(Cast, on_delete=models.DO_NOTHING)
     role_name=models.CharField(max_length=255)
 
-    
+    def __str__(self):
+        return f"{slugify(self.role_name)}-{str(self.role_id)}"
