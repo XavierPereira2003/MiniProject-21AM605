@@ -3,109 +3,95 @@
 {% block title %}My Film Folio - Movies{% endblock %}
 
 {% block style %}
-  <!-- Add any custom styles here -->
+    <!-- Add any custom styles here -->
     .movie-container {
-      display: flex;
-      background-color: lightblue;
-      padding: 1rem;
+    display: flex;
+    background-color: lightblue;
+    padding: 1rem;
     }
     .movie-poster {
-      width: 30%;
+    width: 30%;
     }
     .movie-info {
-      width: 70%;
-      padding-left: 1rem;
+    width: 70%;
+    padding-left: 1rem;
     }
     .cast {
-      margin-top: 2rem;
-      background-color: lightgray;
-      padding: 1rem;
+    margin-top: 2rem;
+    background-color: lightgray;
+    padding: 1rem;
     }
     .movie-details {
-      margin-top: 2rem;
-      background-color: lightgray;
-      padding: 1rem;
+    margin-top: 2rem;
+    background-color: lightgray;
+    padding: 1rem;
+    border-radius: 5px;
+    }
+    .movie-details h2 {
+    margin-bottom: 1rem;
+    }
+    .movie-details p {
+    margin-bottom: 0.5rem;
     }
 
     @media (min-width: 576px) {
     .card-group.card-group-scroll {
-        overflow-x: auto;
-        flex-wrap: nowrap;
-        max-height: 500px;
-        overflow-y: hidden;
+    overflow-x: auto;
+    flex-wrap: nowrap;
+    max-height: 500px;
+    overflow-y: hidden;
     }
     .card {
-        max-height: 300px;
-        max-width: 200px;
-        margin-right: 10px;
+    max-height: 300px;
+    max-width: 200px;
+    margin-right: 10px;
     }
     .card-body{
-        border-style: solid;
+    border-style: solid;
     }
     .card-img-top{
-        border-style: dotted;
+    border-style: dotted;
     }
     .card-group.card-group-scroll > .card {
-        flex-basis: 35%;
+    flex-basis: 35%;
     }
-}
+    }
 
-.movie-container {
-  display: flex;
-  flex-direction: row-reverse;
-  background-color: lightblue;
-  padding: 1rem;
-}
+    .movie-container {
+    display: flex;
+    flex-direction: row-reverse;
+    background-color: lightblue;
+    padding: 1rem;
+    }
 
-.movie-poster {
-  width: 40%;
-}
+    .movie-poster {
+    width: 40%;
+    }
 
-.movie-info {
-  width: 60%;
-  padding-left: 1rem;
-}
+    .movie-info {
+    width: 60%;
+    padding-left: 1rem;
+    }
 
-.movie-poster img {
-  width: 100%;
-  height: auto;
-}
+    .movie-poster img {
+    width: 100%;
+    height: auto;
+    }
 {% endblock %}
 
 {% block content %}
-  <div class="movie-container">
-    <div class="movie-poster">
-      <img src="https://via.placeholder.com/100x100" alt="Movie poster">
+    <div class="movie-container">
+        <div class="movie-poster">
+            <img src="https://via.placeholder.com/100x100" alt="Movie poster">
+        </div>
+        <div class="movie-info">
+            <h1>Movie Title</h1>
+        </div>
     </div>
-    <div class="movie-info">
-      <h1>Movie Title</h1>
-    </div>
-  </div>
-  <div class="cast">
-    <div class="container">
-        <h2>Movie Cast</h2>
+    <div class="cast">
+        <div class="container">
+            <h2>Movie Cast</h2>
             <div class="card-group card-group-scroll">
-                <div class="card">
-                    <img class="card-img-top" src="https://via.placeholder.com/100x100" alt="Card image cap">
-                    <div class="card-body">
-                        <h5 class="card-title">Actor Name</h5>
-                        <p class="card-text">Role</p>
-                    </div>
-                </div>
-                <div class="card">
-                    <img class="card-img-top" src="https://via.placeholder.com/100x100" alt="Card image cap">
-                    <div class="card-body">
-                        <h5 class="card-title">Actor Name</h5>
-                        <p class="card-text">Role</p>
-                    </div>
-                </div>
-                <div class="card">
-                    <img class="card-img-top" src="https://via.placeholder.com/100x100" alt="Card image cap">
-                    <div class="card-body">
-                        <h5 class="card-title">Actor Name</h5>
-                        <p class="card-text">Role</p>
-                    </div>
-                </div>
                 <div class="card">
                     <img class="card-img-top" src="https://via.placeholder.com/100x100" alt="Card image cap">
                     <div class="card-body">
@@ -178,15 +164,15 @@
                 </div>
             </div>
         </div>
-  </div>
-  <div class="movie-details">
-    <h2>Details</h2>
-    <p>Director: Director Name</p>
-    <p>Release Date: Release Date</p>
-    <p>Runtime: Runtime</p>
-    <p>Genre: Genre</p>
-    <p>Country: Country</p>
-    <p>Language: Language</p>
-    <p>Plot: Plot</p>
-  </div>
+    </div>
+    <div class="movie-details">
+        <h2>Details</h2>
+        <p><strong>Director:</strong> Director Name</p>
+        <p><strong>Release Date:</strong> Release Date</p>
+        <p><strong>Runtime:</strong> Runtime</p>
+        <p><strong>Genre:</strong> Genre</p>
+        <p><strong>Country:</strong> Country</p>
+        <p><strong>Language:</strong> Language</p>
+        <p><strong>Plot:</strong> Plot</p>
+    </div>
 {% endblock %}

@@ -4,31 +4,144 @@
 
 {% block style %}
     .actor-container {
-      display: flex;
-      background-color: lightgray;
-      padding: 1rem;
+    display: flex;
+    background-color: lightblue;
+    padding: 2rem;
     }
     .actor-poster {
-      width: 30%;
+    width: 30%;
     }
     .actor-poster img {
-      width: 100%;
-      height: auto;
+    width: 100%;
+    height: auto;
     }
     .actor-info {
-      width: 70%;
-      padding-left: 1rem;
+    width: 70%;
+    padding-left: 1rem;
+    }
+    .biography {
+    margin-top: 1rem;
+    padding: 1rem;
+    background-color: #f9f9f9;
+    border-radius: 5px;
+    }
+    .dob-box {
+    margin-top: 1rem;
+    padding: 1rem;
+    background-color: #f9f9f9;
+    border-radius: 5px;
+    }
+    .dob-label {
+    font-weight: bold;
+    }
+    .work{
+    margin-top: 2rem;
+    background-color: lightgray;
+    padding: 1rem;
+    }
+    @media (min-width: 576px) {
+    .card-group.card-group-scroll {
+    overflow-x: auto;
+    flex-wrap: nowrap;
+    max-height: 500px;
+    overflow-y: hidden;
+    }
+    .card {
+    max-height: 300px;
+    max-width: 200px;
+    margin-right: 10px;
+    }
+    .card-body{
+    border-style: solid;
+    }
+    .card-img-top{
+    border-style: dotted;
+    }
+    .card-group.card-group-scroll > .card {
+    flex-basis: 35%;
+    }
     }
 {% endblock %}
 
 {% block content %}
-  <div class="actor-container">
-    <div class="actor-poster">
-      <img src="https://via.placeholder.com/200x300" alt="Actor poster">
+    <div class="actor-container">
+        <div class="actor-poster">
+            <img src="https://via.placeholder.com/200x300" alt="Actor poster">
+        </div>
+        <div class="actor-info">
+            <h1>Actor Name</h1>
+            <div class="biography">
+                <h3>Biography</h3>
+                <p>Actor Biography Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed sit amet magna ac ipsum
+                    hendrerit imperdiet. Actor Biography Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed sit amet magna ac ipsum
+                    hendrerit imperdiet.
+                    Actor Biography Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed sit amet magna ac ipsum
+                    hendrerit imperdiet.
+                    Actor Biography Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed sit amet magna ac ipsum
+                    hendrerit imperdiet.
+                </p>
+            </div>
+            <div class="dob-box">
+                <span class="dob-label">Date of Birth:</span> January 1, 1980
+            </div>
+        </div>
     </div>
-    <div class="actor-info">
-      <h1>Actor Name</h1>
-      <p>Actor Biography</p>
+
+
+    <div class="work">
+        <div class="container">
+            <h2>Worked In Movies</h2>
+            <div class="card-group card-group-scroll">
+                <div class="card">
+                    <img class="card-img-top" src="https://via.placeholder.com/100x100" alt="Card image cap">
+                    <div class="card-body">
+                        <h5 class="card-title">Movie Name</h5>
+                        <p class="card-text">Role</p>
+                    </div>
+                </div>
+                <div class="card">
+                    <img class="card-img-top" src="https://via.placeholder.com/100x100" alt="Card image cap">
+                    <div class="card-body">
+                        <h5 class="card-title">Movie Name</h5>
+                        <p class="card-text">Role</p>
+                    </div>
+                </div>
+                <div class="card">
+                    <img class="card-img-top" src="https://via.placeholder.com/100x100" alt="Card image cap">
+                    <div class="card-body">
+                        <h5 class="card-title">Movie Name</h5>
+                        <p class="card-text">Role</p>
+                    </div>
+                </div>
+                <div class="card">
+                    <img class="card-img-top" src="https://via.placeholder.com/100x100" alt="Card image cap">
+                    <div class="card-body">
+                        <h5 class="card-title">Movie Name</h5>
+                        <p class="card-text">Role</p>
+                    </div>
+                </div>
+                <div class="card">
+                    <img class="card-img-top" src="https://via.placeholder.com/100x100" alt="Card image cap">
+                    <div class="card-body">
+                        <h5 class="card-title">Movie Name</h5>
+                        <p class="card-text">Role</p>
+                    </div>
+                </div>
+                <div class="card">
+                    <img class="card-img-top" src="https://via.placeholder.com/100x100" alt="Card image cap">
+                    <div class="card-body">
+                        <h5 class="card-title">Movie Name</h5>
+                        <p class="card-text">Role</p>
+                    </div>
+                </div>
+                <div class="card">
+                    <img class="card-img-top" src="https://via.placeholder.com/100x100" alt="Card image cap">
+                    <div class="card-body">
+                        <h5 class="card-title">Movie Name</h5>
+                        <p class="card-text">Role</p>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
-  </div>
 {% endblock %}
