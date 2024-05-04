@@ -50,8 +50,8 @@ class Command(BaseCommand):
             description = movie_data['description']
             release_date = movie_data['release_date']
             poster = movie_data['poster']
-
             director_id = movie_data['director']
+            vote_average = movie_data['vote_average']
             director = Cast.objects.get(cast_id=director_id)
 
             movie, created = Movies.objects.get_or_create(
@@ -62,14 +62,16 @@ class Command(BaseCommand):
                     'release_date': release_date,
                     'poster_path': poster,
                     'director': director,
+                    'vote_average': vote_average,
                     'slug': slugify(title) + "-" + str(movie_id)
                 }
             )
 
-            # If the movie is newly created, set its genre
+            # If the movie is newly created, set its genre and write its avg. vote
             if created:
                 genres = [Genre.objects.get_or_create(genre=genre_name)[0] for genre_name in movie_data['genre']]
                 movie.genre.set(genres)  # Set many-to-many relationship
+
                 movie.save()
 
         # Insert roles

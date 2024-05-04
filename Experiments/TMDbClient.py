@@ -127,7 +127,7 @@ class TMDbClient:
 
 # Example usage:
 tmdb_client = TMDbClient(api_key=os.getenv('api'))
-info = tmdb_client.get_info(save_to_file=True)
+info = tmdb_client.get_info(save_to_file=True, year='2023')
 
 print(info)
 

@@ -44,6 +44,7 @@ class Movies(Model):
     description=models.TextField()
     release_date=models.DateField()
     poster_path = models.CharField(max_length=255)
+    vote_average = models.FloatField(default=0.0)
     slug=models.SlugField(max_length=255, unique=True)
 
     def save(self, *args, **kwargs):
