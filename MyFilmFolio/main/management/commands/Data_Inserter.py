@@ -25,6 +25,7 @@ class Command(BaseCommand):
             name = cast_data['name']
             dob = cast_data.get('birth_date')
             image = cast_data.get('image')
+            bio = cast_data.get('biography')
             slug = slugify(name) + "-" + str(cast_id)  # Generate slug using name and cast_id
 
             # Check if cast with cast_id already exists
@@ -34,6 +35,7 @@ class Command(BaseCommand):
                     'name': name,
                     'DoB': dob,
                     'Image': image,
+                    'bio': bio,
                     'slug': slug  # Set the slug field
                 }
             )
