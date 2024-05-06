@@ -46,7 +46,7 @@
                 <div class="card">
                     <img class="card-img-top" src="https://image.tmdb.org/t/p/w500{{ movie.poster_path }}" alt="{{ movie.title }}">
                     <div class="card-body">
-                        <h5 class="card-title">{{ movie.title }}</h5>
+                        <h5 class="card-title"><a href="{% url 'movie_detail' movie.movie_id %}">{{ movie.title }}</a></h5>
                         <p class="card-text">{{ movie.description|truncate_words:20 }}</p>
                         <p class="card-text"><small class="text-muted">Released: {{ movie.release_date }}</small></p>
                     </div>
@@ -62,7 +62,7 @@
                 <div class="card">
                     <img class="card-img-top" src="https://image.tmdb.org/t/p/w500{{ movie.poster_path }}" alt="{{ movie.title }}">
                     <div class="card-body">
-                        <h5 class="card-title">{{ movie.title }}</h5>
+                        <h5 class="card-title"><a href="{% url 'movie_detail' movie.movie_id %}">{{ movie.title }}</a></h5>
                         <p class="card-text">{{ movie.description|truncate_words:20 }}</p>
                         <p class="card-text"><small class="text-muted">Released: {{ movie.release_date }}</small></p>
                     </div>
@@ -78,7 +78,7 @@
                 <div class="card">
                     <img class="card-img-top" src="https://image.tmdb.org/t/p/w500{{ movie.poster_path }}" alt="{{ movie.title }}">
                     <div class="card-body">
-                        <h5 class="card-title">{{ movie.title }}</h5>
+                        <h5 class="card-title"><a href="{% url 'movie_detail' movie.movie_id %}">{{ movie.title }}</a></h5>
                         <p class="card-text">{{ movie.description|truncate_words:20 }}</p>
                         <p class="card-text"><small class="text-muted">Released: {{ movie.release_date }}</small></p>
                     </div>

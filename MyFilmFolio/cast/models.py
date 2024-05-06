@@ -16,6 +16,7 @@ class Cast(Model):
     DoB=models.DateField(null=True, blank=True)
     Image=models.CharField(max_length=255, null=True, blank=True)
     slug=models.SlugField(max_length=255, unique=True,blank=True)
+    bio = models.TextField(null=True)
 
     def save(self, *args, **kwargs):
         if not self.slug:

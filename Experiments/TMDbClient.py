@@ -2,7 +2,6 @@ import os
 import json
 from tmdbv3api import TMDb, Movie, Person, Discover
 from dotenv import load_dotenv, dotenv_values
-from PopulateDB import DatabaseManager
 
 load_dotenv()
 

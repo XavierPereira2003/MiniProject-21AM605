@@ -1,8 +1,8 @@
-
 from django.urls import path
-from . import views
+from .views import home
+from movies.views import movie_detail
 
 urlpatterns = [
-    path('', views.home, name='home'),
-    # Other URL patterns for additional views
+    path('', home, name='home'),
+    path('movies/<int:movie_id>/', movie_detail, name='movie_detail'),
 ]

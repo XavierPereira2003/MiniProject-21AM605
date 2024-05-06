@@ -1,178 +1,92 @@
 {% extends "base.html" %}
 
-{% block title %}My Film Folio - Movies{% endblock %}
+{% block title %}My Film Folio - {{ movie.title }}{% endblock %}
 
 {% block style %}
-    <!-- Add any custom styles here -->
-    .movie-container {
-    display: flex;
-    background-color: lightblue;
-    padding: 1rem;
+    /* Add any custom styles here */
+   .movie-container {
+        display: flex;
+        flex-wrap: wrap;
+        background-color: lightblue;
+        padding: 1rem;
+        border-radius: 5px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        margin-bottom: 2rem;
     }
-    .movie-poster {
-    width: 30%;
+   .movie-info {
+        flex: 1;
+        margin-right: 1rem; /* Add spacing between title and poster */
     }
-    .movie-info {
-    width: 70%;
-    padding-left: 1rem;
+   .movie-poster {
+        flex: 0 0 200px; /* Set fixed width for poster */
+        margin-left: 1rem;
     }
-    .cast {
-    margin-top: 2rem;
-    background-color: lightgray;
-    padding: 1rem;
+   .movie-poster img {
+        max-width: 100%;
+        height: auto;
     }
-    .movie-details {
-    margin-top: 2rem;
-    background-color: lightgray;
-    padding: 1rem;
-    border-radius: 5px;
+   .movie-details {
+        margin-top: 2rem;
+        background-color: lightgray;
+        padding: 1rem;
+        border-radius: 5px;
     }
-    .movie-details h2 {
-    margin-bottom: 1rem;
+   .movie-details h2 {
+        margin-bottom: 1rem;
     }
-    .movie-details p {
-    margin-bottom: 0.5rem;
+   .movie-details p {
+        margin-bottom: 0.5rem;
     }
-
-    @media (min-width: 576px) {
-    .card-group.card-group-scroll {
-    overflow-x: auto;
-    flex-wrap: nowrap;
-    max-height: 500px;
-    overflow-y: hidden;
+   .empty-field {
+        display: none; /* Hide empty fields */
     }
-    .card {
-    max-height: 300px;
-    max-width: 200px;
-    margin-right: 10px;
-    }
-    .card-body{
-    border-style: solid;
-    }
-    .card-img-top{
-    border-style: dotted;
-    }
-    .card-group.card-group-scroll > .card {
-    flex-basis: 35%;
-    }
-    }
-
-    .movie-container {
-    display: flex;
-    flex-direction: row-reverse;
-    background-color: lightblue;
-    padding: 1rem;
-    }
-
-    .movie-poster {
-    width: 40%;
-    }
-
-    .movie-info {
-    width: 60%;
-    padding-left: 1rem;
-    }
-
-    .movie-poster img {
-    width: 100%;
-    height: auto;
+   .vote-average {
+        font-size: 1.5rem;
+        font-weight: bold;
+        color: #337ab7; /* Use a contrasting color */
     }
 {% endblock %}
 
 {% block content %}
     <div class="movie-container">
-        <div class="movie-poster">
-            <img src="https://via.placeholder.com/100x100" alt="Movie poster">
-        </div>
         <div class="movie-info">
-            <h1>Movie Title</h1>
+            <h1>{{ movie.title }}</h1>
+            <p class="vote-average">Vote Average: {{ movie.vote_average }}</p>
+        </div>
+        <div class="movie-poster">
+            <img src="https://image.tmdb.org/t/p/w500{{ movie.poster_path }}" alt="{{ movie.title }} Poster">
         </div>
     </div>
     <div class="cast">
         <div class="container">
             <h2>Movie Cast</h2>
             <div class="card-group card-group-scroll">
-                <div class="card">
-                    <img class="card-img-top" src="https://via.placeholder.com/100x100" alt="Card image cap">
-                    <div class="card-body">
-                        <h5 class="card-title">Actor Name</h5>
-                        <p class="card-text">Role</p>
+                {% for role in movie.roles_set.all %}
+                    <div class="card">
+                        {% if role.cast.Image %}
+                            <img class="card-img-top" src="https://image.tmdb.org/t/p/w500{{ role.cast.Image }}" alt="{{ role.cast.name }} Photo">
+                        {% endif %}
+                        <div class="card-body">
+                            <h5 class="card-title">{{ role.cast.name }}</h5>
+                            <p class="card-text">{{ role.role_name }}</p>
+                        </div>
                     </div>
-                </div>
-                <div class="card">
-                    <img class="card-img-top" src="https://via.placeholder.com/100x100" alt="Card image cap">
-                    <div class="card-body">
-                        <h5 class="card-title">Actor Name</h5>
-                        <p class="card-text">Role</p>
-                    </div>
-                </div>
-                <div class="card">
-                    <img class="card-img-top" src="https://via.placeholder.com/100x100" alt="Card image cap">
-                    <div class="card-body">
-                        <h5 class="card-title">Actor Name</h5>
-                        <p class="card-text">Role</p>
-                    </div>
-                </div>
-                <div class="card">
-                    <img class="card-img-top" src="https://via.placeholder.com/100x100" alt="Card image cap">
-                    <div class="card-body">
-                        <h5 class="card-title">Actor Name</h5>
-                        <p class="card-text">Role</p>
-                    </div>
-                </div>
-                <div class="card">
-                    <img class="card-img-top" src="https://via.placeholder.com/100x100" alt="Card image cap">
-                    <div class="card-body">
-                        <h5 class="card-title">Actor Name</h5>
-                        <p class="card-text">Role</p>
-                    </div>
-                </div>
-                <div class="card">
-                    <img class="card-img-top" src="https://via.placeholder.com/100x100" alt="Card image cap">
-                    <div class="card-body">
-                        <h5 class="card-title">Actor Name</h5>
-                        <p class="card-text">Role</p>
-                    </div>
-                </div>
-                <div class="card">
-                    <img class="card-img-top" src="https://via.placeholder.com/100x100" alt="Card image cap">
-                    <div class="card-body">
-                        <h5 class="card-title">Actor Name</h5>
-                        <p class="card-text">Role</p>
-                    </div>
-                </div>
-                <div class="card">
-                    <img class="card-img-top" src="https://via.placeholder.com/100x100" alt="Card image cap">
-                    <div class="card-body">
-                        <h5 class="card-title">Actor Name</h5>
-                        <p class="card-text">Role</p>
-                    </div>
-                </div>
-                <div class="card">
-                    <img class="card-img-top" src="https://via.placeholder.com/100x100" alt="Card image cap">
-                    <div class="card-body">
-                        <h5 class="card-title">Actor Name</h5>
-                        <p class="card-text">Role</p>
-                    </div>
-                </div>
-                <div class="card">
-                    <img class="card-img-top" src="https://via.placeholder.com/100x100" alt="Card image cap">
-                    <div class="card-body">
-                        <h5 class="card-title">Actor Name</h5>
-                        <p class="card-text">Role</p>
-                    </div>
-                </div>
+                {% endfor %}
             </div>
         </div>
     </div>
     <div class="movie-details">
         <h2>Details</h2>
-        <p><strong>Director:</strong> Director Name</p>
-        <p><strong>Release Date:</strong> Release Date</p>
-        <p><strong>Runtime:</strong> Runtime</p>
-        <p><strong>Genre:</strong> Genre</p>
-        <p><strong>Country:</strong> Country</p>
-        <p><strong>Language:</strong> Language</p>
-        <p><strong>Plot:</strong> Plot</p>
+        <p class="{% if not movie.director %}empty-field{% endif %}"><strong>Director:</strong> {{ movie.director.name }}</p>
+        <p class="{% if not movie.release_date %}empty-field{% endif %}"><strong>Release Date:</strong> {{ movie.release_date }}</p>
+        <p class="{% if not movie.runtime %}empty-field{% endif %}"><strong>Runtime:</strong> {{ movie.runtime }}</p>
+        <p class="{% if not movie.genre.all %}empty-field{% endif %}"><strong>Genre:</strong>
+            {% for genre in movie.genre.all %}
+                {{ genre.genre }}{% if not forloop.last %}, {% endif %}
+            {% endfor %}
+        </p>
+        <p class="{% if not movie.country %}empty-field{% endif %}"><strong>Country:</strong> {{ movie.country }}</p>
+        <p class="{% if not movie.language %}empty-field{% endif %}"><strong>Language:</strong> {{ movie.language }}</p>
+        <p class="{% if not movie.description %}empty-field{% endif %}"><strong>Plot:</strong> {{ movie.description }}</p>
     </div>
 {% endblock %}
