@@ -36,7 +36,7 @@ class TMDbClient:
         self.person = Person()
         self.discover = Discover()
 
-    def get_info(self, count=2, year='2024', save_to_file = False, file_name = "tmdbsave7.json"):
+    def get_info(self, count=2, year='2024', save_to_file = False, file_name = "tmdbsave9.json"):
         '''
         Gets English Movies, Persons, Actor Roles and Directors information
         :param count: number of movies to return default 2 pages (i.e. 20 Movies)
@@ -126,7 +126,7 @@ class TMDbClient:
 
 # Example usage:
 tmdb_client = TMDbClient(api_key=os.getenv('api'))
-info = tmdb_client.get_info(save_to_file=True, year='2018', count=3)
+info = tmdb_client.get_info(save_to_file=True, year='2016', count=4)
 
 print(info)
 

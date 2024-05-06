@@ -5,13 +5,13 @@ from django.db.models import Q
 
 def home(request):
     # Fetching popular movies based on vote average
-    popular_movies = Movies.objects.order_by('-vote_average')[:6]
+    popular_movies = Movies.objects.order_by('-vote_average')[:10]
 
     # Fetching random movies for featured section
-    featured_movies = Movies.objects.order_by('?')[:6]
+    featured_movies = Movies.objects.order_by('?')[:10]
 
     # Fetching latest movies based on release date
-    latest_movies = Movies.objects.order_by('-release_date')[:6]
+    latest_movies = Movies.objects.order_by('-release_date')[:10]
 
     context = {
         'popular_movies': popular_movies,
