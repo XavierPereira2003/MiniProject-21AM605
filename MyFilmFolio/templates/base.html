@@ -15,10 +15,7 @@
         <div class="container-fluid"><a class="navbar-brand" href="#">My Film Folio</a>
             <!-- Navigation items will be positioned on the right side -->
             <div class="navbar-nav ms-auto">
-                <form class="d-flex"><input class="form-control me-2" type="search" placeholder="Search"
-                                            aria-label="Search">
-                    <button class="btn btn-outline-primary" type="submit">Search</button>
-                </form> <!-- Adding a placeholder login button -->
+                {% block search %}{% endblock %} <!-- Adding a placeholder login button -->
                 <button class="navbar-btn btn btn-link" type="button">Login</button>
             </div>
         </div>

@@ -45,8 +45,27 @@
         font-weight: bold;
         color: #337ab7; /* Use a contrasting color */
     }
+@media (min-width: 576px) {
+  .card-group.card-group-scroll {
+    overflow-x: auto;
+    flex-wrap: nowrap;
+  }
+  .card {
+    margin-right: 10px;
+    flex-basis: 25%; /* Adjust this value to make the cards smaller */
+  }
+  .card-body {
+    border-style: solid;
+  }
+  .card-img-top {
+    border-style: dashed;
+  }
+  .card-group.card-group-scroll > .card {
+    flex-basis: 15%; /* Adjust this value to match the value of .card flex-basis */
+  }
+}
 {% endblock %}
-
+{% block search %}{% endblock %}
 {% block content %}
     <div class="movie-container">
         <div class="movie-info">
@@ -67,7 +86,7 @@
                             <img class="card-img-top" src="https://image.tmdb.org/t/p/w500{{ role.cast.Image }}" alt="{{ role.cast.name }} Photo">
                         {% endif %}
                         <div class="card-body">
-                            <h5 class="card-title">{{ role.cast.name }}</h5>
+                            <h5 class="card-title"><a href="{% url 'movies:cast-view' role.cast.cast_id %}">{{ role.cast.name }}</a></h5>
                             <p class="card-text">{{ role.role_name }}</p>
                         </div>
                     </div>

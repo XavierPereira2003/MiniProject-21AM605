@@ -1,147 +1,107 @@
 {% extends "base.html" %}
 
-{% block title %}My Film Folio - Actors{% endblock %}
+{% block title %}My Film Folio - {{ cast.name }}{% endblock %}
 
 {% block style %}
-    .actor-container {
+/* CSS styles for actor details page */
+
+.actor-container {
     display: flex;
     background-color: lightblue;
     padding: 2rem;
-    }
-    .actor-poster {
+}
+
+.actor-poster {
     width: 30%;
-    }
-    .actor-poster img {
+}
+
+.actor-poster img {
     width: 100%;
     height: auto;
-    }
-    .actor-info {
+    border-radius: 10px;
+}
+
+.actor-info {
     width: 70%;
     padding-left: 1rem;
-    }
-    .biography {
+}
+
+.biography {
     margin-top: 1rem;
     padding: 1rem;
     background-color: #f9f9f9;
     border-radius: 5px;
-    }
-    .dob-box {
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.dob-box {
     margin-top: 1rem;
     padding: 1rem;
     background-color: #f9f9f9;
     border-radius: 5px;
-    }
-    .dob-label {
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.dob-label {
     font-weight: bold;
-    }
-    .work{
+}
+
+.work {
     margin-top: 2rem;
     background-color: lightgray;
     padding: 1rem;
-    }
-    @media (min-width: 576px) {
-    .card-group.card-group-scroll {
+}
+
+@media (min-width: 576px) {
+  .card-group.card-group-scroll {
     overflow-x: auto;
     flex-wrap: nowrap;
-    max-height: 500px;
-    overflow-y: hidden;
-    }
-    .card {
-    max-height: 300px;
-    max-width: 200px;
+  }
+  .card {
     margin-right: 10px;
-    }
-    .card-body{
+    flex-basis: 15%;
+    max-width: 150px; /* Adjust this value to make the cards smaller */
+  }
+  .card-body {
     border-style: solid;
-    }
-    .card-img-top{
-    border-style: dotted;
-    }
-    .card-group.card-group-scroll > .card {
-    flex-basis: 35%;
-    }
-    }
+  }
+  .card-img-top {
+    border-style: dashed;
+  }
+}
 {% endblock %}
-
+{% block search %}{% endblock %}
 {% block content %}
     <div class="actor-container">
         <div class="actor-poster">
-            <img src="https://via.placeholder.com/200x300" alt="Actor poster">
+            <img src="https://image.tmdb.org/t/p/w500{{ cast.Image }}" alt="{{ cast.name }} Poster">
         </div>
         <div class="actor-info">
-            <h1>Actor Name</h1>
+            <h1>{{ cast.name }}</h1>
             <div class="biography">
                 <h3>Biography</h3>
-                <p>Actor Biography Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed sit amet magna ac ipsum
-                    hendrerit imperdiet. Actor Biography Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed sit amet magna ac ipsum
-                    hendrerit imperdiet.
-                    Actor Biography Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed sit amet magna ac ipsum
-                    hendrerit imperdiet.
-                    Actor Biography Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed sit amet magna ac ipsum
-                    hendrerit imperdiet.
-                </p>
+                <p>{{ cast.bio }}</p>
             </div>
             <div class="dob-box">
-                <span class="dob-label">Date of Birth:</span> January 1, 1980
+                <span class="dob-label">Date of Birth:</span> {{ cast.DoB }}
             </div>
         </div>
     </div>
-
 
     <div class="work">
-        <div class="container">
-            <h2>Worked In Movies</h2>
-            <div class="card-group card-group-scroll">
+    <h2>Worked In Movies</h2>
+    <div class="puss-container">
+        <div class="card-group card-group-scroll">
+            {% for role in cast.roles_set.all %}
                 <div class="card">
-                    <img class="card-img-top" src="https://via.placeholder.com/100x100" alt="Card image cap">
+                    <img class="card-img-top" src="https://image.tmdb.org/t/p/w500{{ role.movie.poster_path }}" alt="Movie Poster">
                     <div class="card-body">
-                        <h5 class="card-title">Movie Name</h5>
-                        <p class="card-text">Role</p>
+                        <h5 class="card-title"><a href="{% url 'movie_detail' role.movie.movie_id %}">{{ role.movie.title }}</a></h5>
+                        <p class="card-text">{{ role.role_name }}</p>
                     </div>
                 </div>
-                <div class="card">
-                    <img class="card-img-top" src="https://via.placeholder.com/100x100" alt="Card image cap">
-                    <div class="card-body">
-                        <h5 class="card-title">Movie Name</h5>
-                        <p class="card-text">Role</p>
-                    </div>
-                </div>
-                <div class="card">
-                    <img class="card-img-top" src="https://via.placeholder.com/100x100" alt="Card image cap">
-                    <div class="card-body">
-                        <h5 class="card-title">Movie Name</h5>
-                        <p class="card-text">Role</p>
-                    </div>
-                </div>
-                <div class="card">
-                    <img class="card-img-top" src="https://via.placeholder.com/100x100" alt="Card image cap">
-                    <div class="card-body">
-                        <h5 class="card-title">Movie Name</h5>
-                        <p class="card-text">Role</p>
-                    </div>
-                </div>
-                <div class="card">
-                    <img class="card-img-top" src="https://via.placeholder.com/100x100" alt="Card image cap">
-                    <div class="card-body">
-                        <h5 class="card-title">Movie Name</h5>
-                        <p class="card-text">Role</p>
-                    </div>
-                </div>
-                <div class="card">
-                    <img class="card-img-top" src="https://via.placeholder.com/100x100" alt="Card image cap">
-                    <div class="card-body">
-                        <h5 class="card-title">Movie Name</h5>
-                        <p class="card-text">Role</p>
-                    </div>
-                </div>
-                <div class="card">
-                    <img class="card-img-top" src="https://via.placeholder.com/100x100" alt="Card image cap">
-                    <div class="card-body">
-                        <h5 class="card-title">Movie Name</h5>
-                        <p class="card-text">Role</p>
-                    </div>
-                </div>
-            </div>
+            {% endfor %}
         </div>
     </div>
+</div>
 {% endblock %}
