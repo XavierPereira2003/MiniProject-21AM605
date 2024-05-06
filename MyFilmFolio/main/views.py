@@ -1,5 +1,6 @@
 from django.shortcuts import render
 from movies.models import Movies
+from django.db.models import Q
 
 
 def home(request):
@@ -19,3 +20,22 @@ def home(request):
     }
 
     return render(request, 'home.html', context)
+
+
+def search(request):
+    return render(request, 'search.html')
+
+def search_results(request):
+    query = request.GET.get('q')
+
+    if query:
+        results = Movies.objects.filter(Q(title__icontains=query) | Q(description__icontains=query))
+    else:
+        results = []
+
+    context = {
+        'results': results,
+    }
+
+    return render(request, 'search.html', context)
+
