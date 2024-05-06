@@ -12,7 +12,7 @@
 <header> <!-- <div></div> -->
     <div class="navbar navbar-expand-lg navbar-light bg-light">
         <!-- Adding container to ensure navbar doesn't collapse on mobile devices -->
-        <div class="container-fluid"><a class="navbar-brand" href="#">My Film Folio</a>
+        <div class="container-fluid"><a class="navbar-brand" href="{% url 'home' %}">My Film Folio</a>
             <!-- Navigation items will be positioned on the right side -->
             <div class="navbar-nav ms-auto">
                 {% block search %}{% endblock %} <!-- Adding a placeholder login button -->
