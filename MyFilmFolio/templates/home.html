@@ -1,8 +1,8 @@
 {% extends "base.html" %}
 {% load custom_filters %}
 
-
 {% block title %}Home - My Film Folio{% endblock %}
+
 {% block style %}
     body {
         padding-top: 0;
@@ -35,8 +35,11 @@
         }
     }
 {% endblock %}
+
 {% block search %}
+    <button class="navbar-btn btn btn-link" type="button"><a href="{% url 'search' %}">Search</a></button>
 {% endblock %}
+
 {% block content %}
 <div class="row">
     <div class="col-lg-8">
