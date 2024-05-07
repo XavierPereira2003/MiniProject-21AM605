@@ -14,6 +14,8 @@ from pathlib import Path
 import os
 from dotenv import load_dotenv, dotenv_values
 
+
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -43,7 +45,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'main',
     'movies',
-    'cast'
+    'cast',
+    "users"
 ]
 
 MIDDLEWARE = [
@@ -85,14 +88,10 @@ DATABASES = {
      'default': {
          'ENGINE': "django.db.backends.postgresql",
          'NAME':'postgres',
-         'USER':'anant',
-         'PASSWORD':'',
-         'HOST':'localhost',
-         'PORT':'5432',
-         # 'USER':'superuser',
-         # 'PASSWORD':os.getenv('DBMS_PASS'),
-         # 'HOST':os.getenv('DBMS_ENDPOINT'),
-         # 'PORT':'5432'
+          'USER':'superuser',
+          'PASSWORD':os.getenv('DBMS_PASS'),
+          'HOST':os.getenv('DBMS_ENDPOINT'),
+          'PORT':'5432'
      }
 }
 
