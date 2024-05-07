@@ -166,3 +166,5 @@ SecretsToo.py
 *.jpg
 
 */migrations/*
+
+MyFilmFolio.code-workspace
