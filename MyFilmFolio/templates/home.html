@@ -37,7 +37,8 @@
 {% endblock %}
 
 {% block search %}
-    <button class="navbar-btn btn btn-link" type="button"><a href="{% url 'search' %}">Search</a></button>
+    <button class="navbar-btn btn btn-link" type="button"><a href="{% url 'search' %}">Search Movies</a></button>
+    <button class="navbar-btn btn btn-link" type="button"><a href="{% url 'cast_search' %}">Search Cast</a></button>
 {% endblock %}
 
 {% block content %}
@@ -91,26 +92,25 @@
             </div>
         </div>
     </div>
-    <div class="col-md-3">
-        <!-- Placeholder for sidebar content -->
-        <div class="card" style="width: 18rem;">
-            <div class="card-body">
-                <h5 class="card-title">Select Movies By Genre</h5>
-                <h6 class="card-subtitle mb-2 text-muted">Many Amazing Genres</h6>
-                <p class="card-text">Choose one genre to find many movies of similar kind</p>
-                <div class="row justify-content-between">
-                    <div class="col">
-                        <a href="#" class="card-link">Action</a>
-                    </div>
-                    <div class="col">
-                        <a href="#" class="card-link">Romance</a>
-                    </div>
-                    <div class="col">
-                        <a href="#" class="card-link">Comedy</a>
-                    </div>
+<div class="col-md-3">
+    <!-- Placeholder for sidebar content -->
+    <div class="card" style="width: 18rem;">
+        <div class="card-body">
+            <h5 class="card-title">Select Movies By Genre</h5>
+            <h6 class="card-subtitle mb-2 text-muted">Many Amazing Genres</h6>
+            <p class="card-text">Choose one genre to find many movies of similar kind</p>
+            <div class="genre-links">
+                <div class="row">
+                    {% for genre in genres %}
+                        <div class="col-6">
+                            <a href="{% url 'movies_by_genre' genre.genre %}" class="card-link">{{ genre.genre }}</a>
+                        </div>
+                    {% endfor %}
                 </div>
             </div>
         </div>
     </div>
+</div>
+
 </div>
 {% endblock %}

@@ -11,7 +11,7 @@ class Command(BaseCommand):
 
     def handle(self, *args, **options):
         # Read data from tmdbsave.json file
-        with open('../Experiments/tmdbsave9.json', 'r') as file:
+        with open('../Experiments/tmdbsave3.json', 'r') as file:
             tmdb_data = json.load(file)
 
         # Insert genres

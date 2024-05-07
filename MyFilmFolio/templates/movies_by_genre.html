@@ -1,0 +1,59 @@
+{% extends "base.html" %}
+{% load custom_filters %}
+
+{% block title %}Movies by Genre - My Film Folio{% endblock %}
+
+{% block style %}
+    body {
+        padding-top: 0;
+    }
+
+    .col-md-3 {
+        margin-left: auto; /* Adjust sidebar to the right */
+    }
+
+    .section-spacing {
+        margin-bottom: 40px; /* Adjust the spacing as needed */
+    }
+
+    @media (min-width: 576px) {
+        .card-group.card-group-scroll {
+            overflow-x: auto;
+            flex-wrap: nowrap;
+        }
+        .card {
+            margin-right: 10px;
+            flex-basis: 15%;
+            max-width: 200px; /* Adjust this value to make the cards smaller */
+        }
+        .card-body {
+            border-style: solid;
+        }
+        .card-img-top {
+            border-style: dashed;
+        }
+        .card-group.card-group-scroll > .card {
+            flex-basis: 35%;
+        }
+    }
+{% endblock %}
+
+{% block content %}
+    <h2>Movies in {{ genre }}</h2>
+    <div class="container">
+        <div class="card-group card-group-scroll">
+            {% for movie in genre_movies %}
+                <div class="card">
+                    <img class="card-img-top" src="https://image.tmdb.org/t/p/w500{{ movie.poster_path }}" alt="{{ movie.title }}">
+                    <div class="card-body">
+                        <h5 class="card-title"><a href="{% url 'movie_detail' movie.movie_id %}">{{ movie.title }}</a></h5>
+                        <p class="card-text">{{ movie.description|truncate_words:20 }}</p>
+                        <p class="card-text"><small class="text-muted">Released: {{ movie.release_date }}</small></p>
+                    </div>
+                </div>
+            {% empty %}
+                <p>No movies found for this genre.</p>
+            {% endfor %}
+        </div>
+    </div>
+{% endblock %}
