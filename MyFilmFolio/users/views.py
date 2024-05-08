@@ -3,7 +3,7 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.forms import UserCreationForm
 from movies.models import Movies
 from .models import Users,movieReview,favCast
-
+from django.shortcuts import get_object_or_404
 def login_view(request):
     if request.method == 'POST':
         username = request.POST['username']
@@ -32,7 +32,7 @@ def logout_view(request):
     logout(request)
     return redirect('main:home')
 
-from django.shortcuts import get_object_or_404
+
 
 def reviewMovie(request, user_id):
     user = get_object_or_404(Users, user__id=user_id)
