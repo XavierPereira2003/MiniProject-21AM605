@@ -3,6 +3,8 @@ from movies.views import movie_detail
 from cast.views import cast_view
 from .views import home, search, search_results, movies_by_genre, cast_search, cast_search_results
 
+app_name = 'main'
+
 urlpatterns = [
     path('', home, name='home'),
     path('movies/<int:movie_id>/', movie_detail, name='movie_detail'),

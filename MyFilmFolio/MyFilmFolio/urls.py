@@ -19,7 +19,8 @@ from django.urls import path, include
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', include('main.urls')),
-    path("cast/", include('cast.urls',namespace='cast')),
+    path('', include('main.urls', namespace='main')),
+    path("cast/", include('cast.urls', namespace='cast')),
     path("movies/", include(('movies.urls', 'movies'), namespace='movies')),
+    path("users/", include('users.urls', namespace='users')),
 ]
