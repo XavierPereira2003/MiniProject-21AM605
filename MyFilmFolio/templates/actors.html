@@ -96,8 +96,10 @@
                 <div class="card">
                     <img class="card-img-top" src="https://image.tmdb.org/t/p/w500{{ role.movie.poster_path }}" alt="Movie Poster">
                     <div class="card-body">
-                        <h5 class="card-title"><a href="{% url 'movie_detail' role.movie.movie_id %}">{{ role.movie.title }}</a></h5>
-                        <p class="card-text">{{ role.role_name }}</p>
+                        <h5 class="card-title"><a href="{% url 'movies:movie_detail' role.movie.movie_id %}">{{ role.movie.title }}</a></h5>
+                        {% if role.role_name %}
+                          <p class="card-text">{{ role.role_name }}</p>
+                        {% endif %}
                     </div>
                 </div>
             {% endfor %}
