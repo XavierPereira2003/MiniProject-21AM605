@@ -32,19 +32,12 @@ def logout_view(request):
     logout(request)
     return redirect('main:home')
 
+from django.shortcuts import get_object_or_404
+
 def reviewMovie(request, user_id):
-    """
-    Generate Movies list which has been reviewed by the user
-    Args:
-        request (_type_): _description_
-        user_id (_type_): _description_
-
-    Returns:
-        _type_: _description_
-    """
-    user = Users.objects.get(user_id=user_id)
+    user = get_object_or_404(Users, user__id=user_id)
     username = user.user.username
-    reviews_by_user = movieReview.objects.filter(user=user_id).all()
-    #movie_ids_reviewed_by_user = reviews_by_user.values_list('movie_id', flat=True)
+    reviews_by_user = movieReview.objects.filter(user=user).all()
+    movie_ids_reviewed_by_user = reviews_by_user.values_list('movie_id', flat=True)
 
-    return render(request, 'reviews.html', {'username': username,'movie_ids':reviews_by_user})
+    return render(request, 'reviews.html', {'username': username, 'movie_ids': movie_ids_reviewed_by_user})
