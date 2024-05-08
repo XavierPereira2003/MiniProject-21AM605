@@ -1,10 +1,116 @@
-<!-- home.html -->
-
-{% extends 'base.html' %}
+{% extends "base.html" %}
+{% load custom_filters %}
 
 {% block title %}Home - My Film Folio{% endblock %}
 
+{% block style %}
+    body {
+        padding-top: 0;
+    }
+
+    .col-md-3 {
+        margin-left: auto; /* Adjust sidebar to the right */
+    }
+
+    .section-spacing {
+        margin-bottom: 40px; /* Adjust the spacing as needed */
+    }
+
+    @media (min-width: 576px) {
+        .card-group.card-group-scroll {
+            overflow-x: auto;
+            flex-wrap: nowrap;
+        }
+        .card {
+            margin-right: 10px;
+        }
+        .card-body {
+            border-style: solid;
+        }
+        .card-img-top {
+            border-style: dashed;
+        }
+        .card-group.card-group-scroll > .card {
+            flex-basis: 35%;
+        }
+    }
+{% endblock %}
+
+{% block search %}
+    <button class="navbar-btn btn btn-link" type="button"><a href="{% url 'main:search' %}">Search Movies</a></button>
+    <button class="navbar-btn btn btn-link" type="button"><a href="{% url 'main:cast_search' %}">Search Cast</a></button>
+{% endblock %}
+
 {% block content %}
-<h1>Welcome to My Film Folio</h1>
-<!-- Add more content here -->
+<div class="row">
+    <div class="col-lg-8">
+        <h2>Featured Movies</h2>
+        <div class="container">
+            <div class="card-group card-group-scroll">
+                {% for movie in featured_movies %}
+                <div class="card">
+                    <img class="card-img-top" src="https://image.tmdb.org/t/p/w500{{ movie.poster_path }}" alt="{{ movie.title }}">
+                    <div class="card-body">
+                        <h5 class="card-title"><a href="{% url 'movies:movie_detail' movie.movie_id %}">{{ movie.title }}</a></h5>
+                        <p class="card-text">{{ movie.description|truncate_words:20 }}</p>
+                        <p class="card-text"><small class="text-muted">Released: {{ movie.release_date }}</small></p>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+        <div class="section-spacing"></div>
+        <h2>Popular Movies</h2>
+        <div class="container">
+            <div class="card-group card-group-scroll">
+                {% for movie in popular_movies %}
+                <div class="card">
+                    <img class="card-img-top" src="https://image.tmdb.org/t/p/w500{{ movie.poster_path }}" alt="{{ movie.title }}">
+                    <div class="card-body">
+                        <h5 class="card-title"><a href="{% url 'movies:movie_detail' movie.movie_id %}">{{ movie.title }}</a></h5>
+                        <p class="card-text">{{ movie.description|truncate_words:20 }}</p>
+                        <p class="card-text"><small class="text-muted">Released: {{ movie.release_date }}</small></p>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+        <div class="section-spacing"></div>
+        <h2>Latest Movies</h2>
+        <div class="container">
+            <div class="card-group card-group-scroll">
+                {% for movie in latest_movies %}
+                <div class="card">
+                    <img class="card-img-top" src="https://image.tmdb.org/t/p/w500{{ movie.poster_path }}" alt="{{ movie.title }}">
+                    <div class="card-body">
+                        <h5 class="card-title"><a href="{% url 'movies:movie_detail' movie.movie_id %}">{{ movie.title }}</a></h5>
+                        <p class="card-text">{{ movie.description|truncate_words:20 }}</p>
+                        <p class="card-text"><small class="text-muted">Released: {{ movie.release_date }}</small></p>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+<div class="col-md-3">
+    <!-- Placeholder for sidebar content -->
+    <div class="card" style="width: 18rem;">
+        <div class="card-body">
+            <h5 class="card-title">Select Movies By Genre</h5>
+            <h6 class="card-subtitle mb-2 text-muted">Many Amazing Genres</h6>
+            <p class="card-text">Choose one genre to find many movies of similar kind</p>
+            <div class="genre-links">
+                <div class="row">
+                    {% for genre in genres %}
+                        <div class="col-6">
+                            <a href="{% url 'main:movies_by_genre' genre.genre %}" class="card-link">{{ genre.genre }}</a>
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+</div>
 {% endblock %}

@@ -1,6 +1,8 @@
 from django.db import models
-from django.db import models, Model
-
+from django.db.models import Model
+from django.utils.text import slugify
+from cast.models import Cast
+from django.core.files.storage import FileSystemStorage
 
 MOVIE_GENRES = [
     ("action", "Action"),
@@ -26,18 +28,42 @@ MOVIE_GENRES = [
 ]
 # Create your models here.
 
+class Genre(Model):
+    genre = models.CharField(max_length=255, choices=MOVIE_GENRES)
+
+    def __str__(self):
+        return self.genre
 class Movies(Model):
     """
     A class representing a movie in the database.
     """
     movie_id=models.BigAutoField(primary_key=True)
     title=models.CharField(max_length=255)
-    genre=models.CharField(max_length=255, choices=MOVIE_GENRES)   
-    discription=models.TextField()
+    genre=models.ManyToManyField(Genre,related_name="movies")
+    director=models.ForeignKey(Cast, on_delete=models.DO_NOTHING)
+    description=models.TextField()
     release_date=models.DateField()
-    poster_path=models.ImageField()
+    poster_path = models.CharField(max_length=255)
+    vote_average = models.FloatField(default=0.0)
+    slug=models.SlugField(max_length=255, unique=True)
+
+    def save(self, *args, **kwargs):
+        if not self.slug:
+            self.slug = f"{slugify(self.title)}-{str(self.movie_id)}"
+        super().save(*args, **kwargs)
 
     def __str__(self):
-        return "_".join(self.title.split())+str(self.movie_id)
+        return f"{slugify(self.title)}-{str(self.movie_id)}"
     
     
+class Roles(Model):
+    """
+    A class representing a role played by a cast member in a movie.
+    """
+    role_id=models.BigAutoField(primary_key=True)
+    movie=models.ForeignKey(Movies, on_delete=models.DO_NOTHING)
+    cast=models.ForeignKey(Cast, on_delete=models.DO_NOTHING)
+    role_name=models.CharField(max_length=255)
+
+    def __str__(self):
+        return f"{slugify(self.role_name)}-{str(self.role_id)}"

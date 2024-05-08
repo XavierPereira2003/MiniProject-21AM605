@@ -1,0 +1,98 @@
+<!-- base.html -->
+{% extends "base.html" %}
+{% load custom_filters %}
+
+{% block title %}Home - My Film Folio{% endblock %}
+
+{% block style %}
+<style>
+    /* Center the search box */
+   .search-container {
+        max-width: 400px; /* adjust the width as needed */
+        margin: 50px auto; /* center the container */
+        text-align: center;
+    }
+
+    /* Style for the search form */
+   .search-form {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    /* Style for the search input */
+   .search-form input[type="text"] {
+        padding: 5px; /* reduced padding */
+        font-size: 16px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        width: 100%;
+    }
+
+    /* Style for the search button */
+   .search-form button[type="submit"] {
+        padding: 10px 20px;
+        font-size: 16px;
+        background-color: #4CAF50;
+        color: #fff;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+    }
+
+    /* Style for the search results table */
+   .search-results {
+        margin-top: 20px;
+        border-collapse: collapse;
+        width: 100%;
+    }
+
+   .search-results th,
+   .search-results td {
+        border: 1px solid #ddd;
+        padding: 8px;
+        text-align: left;
+    }
+
+   .search-results th {
+        background-color: #f2f2f2;
+    }
+</style>
+{% endblock %}
+
+{% block search %}
+{% endblock %}
+
+{% block content %}
+    <!-- Centered search box -->
+    <div class="search-container">
+        <form action="{% url 'main:search_results' %}" method="GET" class="search-form">
+            <input type="text" name="q" placeholder="Search movies...">
+            <button type="submit">Search</button>
+        </form>
+    </div>
+
+    <!-- Search results table -->
+    <table class="search-results">
+        <thead>
+            <tr>
+                <th>Title</th>
+                <th>Description</th>
+                <!-- Add more table headers as needed -->
+            </tr>
+        </thead>
+        <tbody>
+            {% for movie in results %}
+            <tr>
+                <td><a href="{% url 'movies:movie_detail' movie.movie_id %}">{{ movie.title }}</td>
+                <td>{{ movie.description }}</td>
+                <!-- Add more table cells as needed -->
+            </tr>
+            {% empty %}
+            <tr>
+                <td colspan="2">No results found.</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}
