@@ -66,7 +66,7 @@
 {% block content %}
     <!-- Centered search box -->
     <div class="search-container">
-        <form action="{% url 'search_results' %}" method="GET" class="search-form">
+        <form action="{% url 'main:search_results' %}" method="GET" class="search-form">
             <input type="text" name="q" placeholder="Search movies...">
             <button type="submit">Search</button>
         </form>
@@ -84,7 +84,7 @@
         <tbody>
             {% for movie in results %}
             <tr>
-                <td><a href="{% url 'movie_detail' movie.movie_id %}">{{ movie.title }}</td>
+                <td><a href="{% url 'movies:movie_detail' movie.movie_id %}">{{ movie.title }}</td>
                 <td>{{ movie.description }}</td>
                 <!-- Add more table cells as needed -->
             </tr>
