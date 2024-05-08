@@ -32,7 +32,7 @@ def logout_view(request):
     logout(request)
     return redirect('main:home')
 
-def reviewMovie(request,user_id):
+def reviewMovie(request, user_id):
     """
     Generate Movies list which has been reviewed by the user
     Args:
@@ -42,10 +42,9 @@ def reviewMovie(request,user_id):
     Returns:
         _type_: _description_
     """
-    username=Users.objects.get(user_id=user_id).values_list('username', flat=True).first()
-    reviews_by_user=movieReview.objects.filter(user_id=user_id)
-    movie_scores_dict = {review.movie_id: review.review for review in reviews_by_user}
-    movie_ids_reviewed_by_user = reviews_by_user.values_list('movie_id', flat=True)
-    movies_reviewed_by_user=Movies.objects.filter(movie_id__in=movie_ids_reviewed_by_user)
-    movies_and_scores = [(movie, movie_scores_dict[movie.movie_id]) for movie in movies_reviewed_by_user]
-    return render(request, 'reviews.html', {'username':username, 'movies_and_scores': movies_and_scores})
+    user = Users.objects.get(user_id=user_id)
+    username = user.user.username
+    reviews_by_user = movieReview.objects.filter(user=user_id).all()
+    #movie_ids_reviewed_by_user = reviews_by_user.values_list('movie_id', flat=True)
+
+    return render(request, 'reviews.html', {'username': username,'movie_ids':reviews_by_user})
