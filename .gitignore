@@ -161,3 +161,4 @@ cython_debug/
 ./env
 Secrets.py
 SecretsToo.py
+*.code-workspace
