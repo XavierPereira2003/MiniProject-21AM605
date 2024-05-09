@@ -2,8 +2,20 @@ from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.forms import UserCreationForm
 from movies.models import Movies
+from django.contrib.auth.decorators import login_required
 from .models import Users,movieReview,favCast
 from django.shortcuts import get_object_or_404
+
+@login_required
+def rated_movies(request):
+    # Get or create the Users instance associated with the logged-in user
+    users_instance, created = Users.objects.get_or_create(user=request.user)
+
+    # Retrieve the movie reviews for the current user
+    user_reviews = movieReview.objects.filter(user=users_instance)
+
+    return render(request, 'rated_movies.html', {'user_reviews': user_reviews})
+
 def login_view(request):
     if request.method == 'POST':
         username = request.POST['username']
