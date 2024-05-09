@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+
+{% block title %}Rated Movies - My Film Folio{% endblock %}
+
+{% block content %}
+    <h1>Rated Movies</h1>
+    {% if user_reviews %}
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Movie Title</th>
+                    <th>Rating</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for review in user_reviews %}
+                    <tr>
+                        <td><a href="{% url 'movies:movie_detail' review.movie.movie_id %}">{{ review.movie.title }}</a></td>
+                        <td>{{ review.review }}</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    {% else %}
+        <p>No rated movies found.</p>
+    {% endif %}
+{% endblock %}
