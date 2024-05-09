@@ -24,6 +24,7 @@ class Users(models.Model):
     def __str__(self) -> str:
         return self.user.username
 
+# The following two funtions are the part's t
 @receiver(post_save, sender=User)
 def create_user_profile(sender, instance, created, **kwargs):
     if created:
@@ -64,6 +65,6 @@ class movieReview(models.Model):
     movie = models.ForeignKey(Movies, on_delete=models.CASCADE)
     review=models.IntegerField(validators=[MaxValueValidator(10),MinValueValidator(1)],blank=True)
 
-    def __str__(self):
+    def __str__(self)->str:
         return slugify(f"{self.user.user.username}-{self.movie.title}")
 

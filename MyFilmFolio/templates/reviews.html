@@ -4,7 +4,36 @@
 
 {% block style %}
 <!--Style Sheet-->
+<style>
+    /* Style for the list container */
+    ul {
+        list-style-type: none;
+        padding: 0;
+        margin: 0;
+    }
 
+    /* Style for each list item */
+    li {
+        padding: 20px;
+        margin-bottom: 10px;
+        border-radius: 5px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        display: flex;
+        justify-content: space-between;
+    }
+
+    /* Style for movie title */
+    .movie-title {
+        font-weight: bold;
+        margin-right: 20px;
+    }
+
+    /* Style for review score */
+    .review-score {
+        font-weight: bold;
+        color: #666;
+    }
+</style>
 {% endblock%}
 {%block content%}
 <h1> {{ username }}'s List</h1>
@@ -12,8 +41,9 @@
     <ul>
         {% for review in reviews %}
             <li>
-                <strong>Movie: {{ review.movie.title }}</strong><br>
-                <strong>Rating: {{ review.review }}</strong><br>
+                <span class="movie-title"><a href="{% url 'movies:movie_detail' review.movie.movie_id %}">{{ review.movie.title }}</a></span>
+                <span class="review-score">{{ review.review }}</span>
             </li>
         {% endfor %}
+    </ul>
 {% endblock%}
