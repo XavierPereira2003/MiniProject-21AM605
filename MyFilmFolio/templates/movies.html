@@ -3,116 +3,79 @@
 {% block title %}My Film Folio - {{ movie.title }}{% endblock %}
 
 {% block style %}
-    .movie-container {
-    display: flex;
-    flex-wrap: wrap;
-    background-color: lightblue;
-    padding: 1rem;
-    border-radius: 5px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    margin-bottom: 2rem;
-}
-
-.movie-info {
-    flex: 1;
-    margin-right: 1rem;
-}
-
-.movie-poster {
-    margin-left: auto; /* Pushes the movie poster to the right */
-    max-width: 200px; /* Adjust the maximum width of the poster as needed */
-}
-
-.movie-poster img {
-    max-width: 100%;
-    height: auto;
-}
-
-    .movie-details {
-    margin-top: 2rem;
-    background-color: lightgray;
-    padding: 1rem;
-    border-radius: 5px;
+    /* Add any custom styles here */
+   .movie-container {
+        display: flex;
+        flex-wrap: wrap;
+        background-color: lightblue;
+        padding: 1rem;
+        border-radius: 5px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        margin-bottom: 2rem;
     }
-    .movie-details h2 {
-    margin-bottom: 1rem;
+   .movie-info {
+        flex: 1;
+        margin-right: 1rem; /* Add spacing between title and poster */
     }
-    .movie-details p {
-    margin-bottom: 0.5rem;
+   .movie-poster {
+        flex: 0 0 200px; /* Set fixed width for poster */
+        margin-left: 1rem;
     }
-    .empty-field {
-    display: none; /* Hide empty fields */
+   .movie-poster img {
+        max-width: 100%;
+        height: auto;
     }
-    .vote-average {
-    font-size: 1.5rem;
-    font-weight: bold;
-    color: #337ab7; /* Use a contrasting color */
+   .movie-details {
+        margin-top: 2rem;
+        background-color: lightgray;
+        padding: 1rem;
+        border-radius: 5px;
     }
-    @media (min-width: 576px) {
-    .card-group.card-group-scroll {
+   .movie-details h2 {
+        margin-bottom: 1rem;
+    }
+   .movie-details p {
+        margin-bottom: 0.5rem;
+    }
+   .empty-field {
+        display: none; /* Hide empty fields */
+    }
+   .vote-average {
+        font-size: 1.5rem;
+        font-weight: bold;
+        color: #337ab7; /* Use a contrasting color */
+    }
+@media (min-width: 576px) {
+  .card-group.card-group-scroll {
     overflow-x: auto;
     flex-wrap: nowrap;
-    }
-    .card {
+  }
+  .card {
     margin-right: 10px;
     flex-basis: 25%; /* Adjust this value to make the cards smaller */
-    }
-    .card-body {
+  }
+  .card-body {
     border-style: solid;
-    }
-    .card-img-top {
+  }
+  .card-img-top {
     border-style: dashed;
-    }
-    .card-group.card-group-scroll > .card {
+  }
+  .card-group.card-group-scroll > .card {
     flex-basis: 15%; /* Adjust this value to match the value of .card flex-basis */
-    }
-    }
+  }
+}
 {% endblock %}
-
 {% block search %}{% endblock %}
-
 {% block content %}
-<div class="movie-container">
-    <div class="movie-info">
-        <h1>{{ movie.title }}</h1>
-        <p class="vote-average">Vote Average: {{ movie.vote_average }}</p>
-
-        {% if user.is_authenticated %}
-            {% if user_rating %}
-                <p>You have rated the movie: {{ user_rating }}</p>
-            {% else %}
-                <p>You have not rated this movie yet.</p>
-            {% endif %}
-        {% else %}
-            <p>Please to rate this movie.</p>
-        {% endif %}
-
-        {% if user.is_authenticated %}
-        <form method="post" action="{% url 'movies:post_review' %}">
-            {% csrf_token %}
-            <input type="hidden" name="movie_id" value="{{ movie.movie_id }}">
-            <label for="rating">Rate this movie:</label>
-            <select name="rating" id="rating">
-                <option value="1">1</option>
-                <option value="2">2</option>
-                <option value="3">3</option>
-                <option value="4">4</option>
-                <option value="5">5</option>
-                <option value="6">6</option>
-                <option value="7">7</option>
-                <option value="8">8</option>
-                <option value="9">9</option>
-                <option value="10">10</option>
-            </select>
-            <button type="submit">Submit</button>
-        </form>
-        {% endif %}
+    <div class="movie-container">
+        <div class="movie-info">
+            <h1>{{ movie.title }}</h1>
+            <p class="vote-average">Vote Average: {{ movie.vote_average }}</p>
+        </div>
+        <div class="movie-poster">
+            <img src="https://image.tmdb.org/t/p/w500{{ movie.poster_path }}" alt="{{ movie.title }} Poster">
+        </div>
     </div>
-    <div class="movie-poster">
-        <img src="https://image.tmdb.org/t/p/w500{{ movie.poster_path }}" alt="{{ movie.title }} Poster">
-    </div>
-</div>
-
     <div class="cast">
         <div class="container">
             <h2>Movie Cast</h2>
@@ -120,12 +83,10 @@
                 {% for role in movie.roles_set.all %}
                     <div class="card">
                         {% if role.cast.Image %}
-                            <img class="card-img-top" src="https://image.tmdb.org/t/p/w500{{ role.cast.Image }}"
-                                 alt="{{ role.cast.name }} Photo">
+                            <img class="card-img-top" src="https://image.tmdb.org/t/p/w500{{ role.cast.Image }}" alt="{{ role.cast.name }} Photo">
                         {% endif %}
                         <div class="card-body">
-                            <h5 class="card-title"><a
-                                    href="{% url 'movies:cast-view' role.cast.cast_id %}">{{ role.cast.name }}</a></h5>
+                            <h5 class="card-title"><a href="{% url 'movies:cast-view' role.cast.cast_id %}">{{ role.cast.name }}</a></h5>
                             <p class="card-text">{{ role.role_name }}</p>
                         </div>
                     </div>
@@ -135,10 +96,8 @@
     </div>
     <div class="movie-details">
         <h2>Details</h2>
-        <p class="{% if not movie.director %}empty-field{% endif %}">
-            <strong>Director:</strong> {{ movie.director.name }}</p>
-        <p class="{% if not movie.release_date %}empty-field{% endif %}"><strong>Release
-            Date:</strong> {{ movie.release_date }}</p>
+        <p class="{% if not movie.director %}empty-field{% endif %}"><strong>Director:</strong> {{ movie.director.name }}</p>
+        <p class="{% if not movie.release_date %}empty-field{% endif %}"><strong>Release Date:</strong> {{ movie.release_date }}</p>
         <p class="{% if not movie.runtime %}empty-field{% endif %}"><strong>Runtime:</strong> {{ movie.runtime }}</p>
         <p class="{% if not movie.genre.all %}empty-field{% endif %}"><strong>Genre:</strong>
             {% for genre in movie.genre.all %}
@@ -147,7 +106,6 @@
         </p>
         <p class="{% if not movie.country %}empty-field{% endif %}"><strong>Country:</strong> {{ movie.country }}</p>
         <p class="{% if not movie.language %}empty-field{% endif %}"><strong>Language:</strong> {{ movie.language }}</p>
-        <p class="{% if not movie.description %}empty-field{% endif %}"><strong>Plot:</strong> {{ movie.description }}
-        </p>
+        <p class="{% if not movie.description %}empty-field{% endif %}"><strong>Plot:</strong> {{ movie.description }}</p>
     </div>
 {% endblock %}
