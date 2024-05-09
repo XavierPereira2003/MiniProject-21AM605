@@ -34,10 +34,10 @@ def logout_view(request):
 
 
 
+
+
 def reviewMovie(request, user_id):
     user = get_object_or_404(Users, user__id=user_id)
     username = user.user.username
-    reviews_by_user = movieReview.objects.filter(user=user).all()
-    movie_ids_reviewed_by_user = reviews_by_user.values_list('movie_id', flat=True)
-
-    return render(request, 'reviews.html', {'username': username, 'movie_ids': movie_ids_reviewed_by_user})
+    reviews_by_user = movieReview.objects.filter(user=user).select_related('movie')  # Join with the movie
+    return render(request, 'reviews.html', {'username': username, 'reviews': reviews_by_user})

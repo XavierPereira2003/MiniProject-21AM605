@@ -41,6 +41,8 @@ def save_profile(sender, instance, **kwargs):
     users_instance.location = instance.users.location
     users_instance.birth_date = instance.users.birth_date
     users_instance.save()
+
+    
 class favCast(models.Model):
     """
     Class Indicating the users Favorite Cast Member
@@ -61,4 +63,7 @@ class movieReview(models.Model):
     user = models.ForeignKey(Users, on_delete=models.CASCADE)
     movie = models.ForeignKey(Movies, on_delete=models.CASCADE)
     review=models.IntegerField(validators=[MaxValueValidator(10),MinValueValidator(1)],blank=True)
+
+    def __str__(self):
+        return slugify(f"{self.user.user.username}-{self.movie.title}")
 
